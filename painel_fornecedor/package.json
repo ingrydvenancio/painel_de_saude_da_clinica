@@ -1,0 +1,13 @@
+{
+  "name": "herança-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Main.js",
+  "type":"module",
+  "scripts": {
+    "start": "node Main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
