@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Saúde da Clínica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="container">
+            <p class="tag">CLÍNICA DE BEM-ESTAR</p>
+            <h1>Painel de Saúde</h1>
+            <p>Cadastro de pacientes particulares e de convênio com consulta automática de CEP.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Cadastro do paciente</h2>
+
+            <form id="formPaciente">
+                <div class="grid-form">
+                    <div class="campo campo-grande">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="tipo">Tipo de paciente</label>
+                        <select id="tipo" name="tipo">
+                            <option value="Particular">Particular</option>
+                            <option value="Convenio">Convênio</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="carteirinha">Carteirinha</label>
+                        <input
+                            type="text"
+                            id="carteirinha"
+                            name="carteirinha"
+                            placeholder="Somente convênio"
+                            disabled
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="altura">Altura (m)</label>
+                        <input
+                            type="number"
+                            id="altura"
+                            name="altura"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="Ex.: 1.70"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="peso">Peso (kg)</label>
+                        <input
+                            type="number"
+                            id="peso"
+                            name="peso"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="Ex.: 70"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="cep">CEP</label>
+                        <input
+                            type="text"
+                            id="cep"
+                            name="cep"
+                            inputmode="numeric"
+                            maxlength="9"
+                            placeholder="00000-000"
+                            required
+                        >
+                        <small>Ao sair do campo, o endereço será consultado.</small>
+                    </div>
+
+                    <div class="campo campo-grande">
+                        <label for="cidade">Cidade / UF</label>
+                        <input
+                            type="text"
+                            id="cidade"
+                            name="cidade"
+                            placeholder="Preenchido automaticamente"
+                            readonly
+                        >
+                    </div>
+                </div>
+
+                <button type="submit">Cadastrar paciente</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <div class="titulo-secao">
+                <div>
+                    <h2>Relatório de pacientes</h2>
+                    <p>Os pacientes cadastrados aparecem abaixo sem recarregar a página.</p>
+                </div>
+            </div>
+
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Cidade/UF</th>
+                            <th>Altura</th>
+                            <th>Peso</th>
+                            <th>IMC</th>
+                            <th>Classificação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaPacientes"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card json-card">
+            <h2>Painel do Desenvolvedor — JSON e API</h2>
+
+            <div class="explicacao">
+                <h3>O que é JSON?</h3>
+                <p>
+                    JSON significa <strong>JavaScript Object Notation</strong>.
+                    É um formato leve utilizado para organizar e transportar dados.
+                    As informações são estruturadas principalmente em pares de
+                    <strong>chave e valor</strong>, por exemplo:
+                    <code>{ "cidade": "São Paulo", "uf": "SP" }</code>.
+                </p>
+
+                <h3>Como a requisição funciona no navegador?</h3>
+                <p>
+                    O JavaScript utiliza o método <strong>fetch()</strong> para
+                    fazer uma requisição à internet. Nesse projeto, o navegador
+                    consulta a API do ViaCEP quando o usuário termina de digitar
+                    o CEP. A operação é assíncrona, portanto a página pode
+                    continuar funcionando sem precisar ser recarregada.
+                </p>
+
+                <h3>Como o JavaScript utiliza a resposta?</h3>
+                <p>
+                    Depois que o servidor responde, utilizamos
+                    <strong>await resposta.json()</strong>. Esse método interpreta
+                    os dados recebidos em JSON e os transforma em um objeto
+                    JavaScript. Assim, podemos acessar informações como
+                    <code>dados.localidade</code> e <code>dados.uf</code> para
+                    preencher automaticamente o campo Cidade/UF.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Painel de Saúde da Clínica de Bem-Estar • Projeto de JavaScript ES6+</p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
